@@ -531,7 +531,8 @@ void sysfs_remove_one(struct sysfs_addrm_cxt *acxt, struct sysfs_dirent *sd)
 {
 	struct sysfs_inode_attrs *ps_iattr;
 
-	BUG_ON(sd->s_flags & SYSFS_FLAG_REMOVED);
+	if(WARN_ON(sd->s_flags & SYSFS_FLAG_REMOVED))
+		return;
 
 	sysfs_unlink_sibling(sd);
 
